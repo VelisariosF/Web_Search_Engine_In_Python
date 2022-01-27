@@ -1,4 +1,4 @@
 from Crawler import *
 from FilesHelper import *
-from QueryProcessor import *
-from Inverted_Index import *
+from PostingList import *
+from Ftd_DocIdPair import *
