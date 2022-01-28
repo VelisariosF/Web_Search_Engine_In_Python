@@ -3,7 +3,7 @@ from Term_PostingList_Pair import Term_PostingList_Pair
 
 
 class InvertedIndex:
-   data = [Term_PostingList_Pair() for _ in range(Collection.getNumberOfTerms())]
+   data = {}
    def __init__(self):
        pass
 

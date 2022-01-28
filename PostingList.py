@@ -1,11 +1,12 @@
 import math
 
 from Modules import *
+import Collection
 class PostingList:
     num0fDocsThatContainCurrentTerm = -1
-    docIdFtdPairs = (Ftd_DocIdPair() for _ in range(num0fDocsThatContainCurrentTerm))
-    idft = math.log(1 + (Collection.getNumberOfDocuments() / num0fDocsThatContainCurrentTerm))
-
+    ## dictionary in the form of (docId, ftd) pairs
+    docIdFtdPairs = {}
+    termPosInLexicon = -1
     def __init__(self):
         pass
 
@@ -17,18 +18,18 @@ class PostingList:
     def getDocIdFtdpairs(self):
         return self.docIdFtdPairs
 
-    def getIdft(self):
-        return self.idft
+
+
+
 
     def getFtdFromTheDocIdFtdPairsByDocumentId(self, documentID):
-        for pair in self.docIdFtdPairs:
-            if(pair.getDocID() == documentID):
-                return pair.getTermAppsInDoc()
+         if(not(self.docIdFtdPairs.get(documentID) == None)):
+            return self.docIdFtdPairs.get(documentID)
 
         ##if the documentID doies not exist in the postingList return -1
-        return -1
+         return -1
 
-
-
+    def getTermPosInLexicon(self):
+        return self.termPosInLexicon
 
 

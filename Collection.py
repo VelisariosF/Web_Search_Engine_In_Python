@@ -11,3 +11,5 @@ class Collection:
 
     def getNumberOfTerms(self):
         return self.NUMBER_OF_TERMS
+
+

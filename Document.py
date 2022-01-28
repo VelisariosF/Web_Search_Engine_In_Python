@@ -1,6 +1,7 @@
 import math
 
 import HerlperFunctions
+from InvertedIndex import InvertedIndex
 from Modules import *
 from Term_PostingList_Pair import Term_PostingList_Pair
 
@@ -8,7 +9,7 @@ from Term_PostingList_Pair import Term_PostingList_Pair
 class Document:
 
 
-    def __init__(self, ID, title, text):
+    def __init__(self, ID, title):
         self.documentID = ID
         self.documentLENGTH = -1
         self.documentTitle = title
@@ -24,14 +25,14 @@ class Document:
     def getDocTitle(self):
         return self.documentTitle
 
-    def calculateDocumentVector(self):
+    def calculateDocumentVector(self, documentId):
         ## get the data form the index
-        invertedIndexData = InvertedIndex.getInvertedIndexData()
-        for pair in invertedIndexData:
+        invertedIndexData = dict(InvertedIndex.getInvertedIndexData())
+        for term in invertedIndexData.keys():
             ##for every (term, postingList) pair get the posting list
-            postingList = Term_PostingList_Pair(pair).getTermsPostingList()
+            postingList = invertedIndexData.get(term)
             ##fom the terms posting list get the ftd of this specific doc using the docs Id
-            ftd = postingList.getFtdFromTheDocIdFtdPairsByDocumentId(self.documentID)
+            ftd = postingList.getFtdFromTheDocIdFtdPairsByDocumentId(documentID)
             if(ftd != -1):
                 ## if ftd is not equal to -1 it means this term exists in the specific document
                 ## thus we can calculate its weight in the specific document
