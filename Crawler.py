@@ -1,13 +1,17 @@
 
 import hmac
 import re
+
+import FilesHelper
 import HtmlLink
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
+import Tokenizer
 
 
 class Crawler:
+    documentID = 0
     def __init__(self, url_to_crawl, number_of_urls_to_crawl):
         self.url_to_crawl = url_to_crawl
         self.crawled_urls = []
@@ -20,7 +24,7 @@ class Crawler:
       html = urlopen(self.url_to_crawl).read()
       urls_found = []
       soup = BeautifulSoup(html, features="html.parser")
-      
+      url_text_List = []
       
       while self.stop == False:
         ##if url has not been found before start parsing it
@@ -30,9 +34,16 @@ class Crawler:
             url_title = ""
             for title in soup.find_all('title'):
                url_title = title.get_text()
+            for text in soup.find_all('p'):
+                url_text_List.append(text.getText())
+            url_text = Tokenizer.Tokenizer().listToString(url_text_List)
+
            ## html_link = HtmlLink(url_title, self.url_to_crawl)
            ## self.crawled_html_links.append(html_link)
             self.crawled_urls.append(self.url_to_crawl)
+            FilesHelper.FilesHelper().saveDocumentToFile(self.documentID, url_text)
+            self.documentID = self.documentID + 1
+            url_text_List.clear()
             if(len(self.crawled_urls) == self.number_of_urls_to_crawl):
                self.stop = True
         else:

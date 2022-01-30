@@ -25,6 +25,7 @@ class Document:
     def getDocTitle(self):
         return self.documentTitle
 
+    ##method to calculate the vector of a specfic document
     def calculateDocumentVector(self, documentId):
         ## get the data form the index
         invertedIndexData = dict(InvertedIndex.getInvertedIndexData())

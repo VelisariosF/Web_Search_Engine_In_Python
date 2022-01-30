@@ -11,3 +11,6 @@ from QueryProcessor import *
 from Query import *
 from Tokenizer import *
 import re
+import collections
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize

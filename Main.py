@@ -1,4 +1,8 @@
+import collections
 import re
+
+import FilesHelper
+from Crawler import Crawler
 
 if __name__ == '__main__':
 
@@ -16,12 +20,12 @@ if __name__ == '__main__':
 
     d = {
         "vel" : 20,
-        "mike" : 40
+        "mike" : 40,
+        "kal" : 15,
+        "nik" : 12
     }
 
 
-    for pair in d.items():
-        pair.
-
-
+    crawler = Crawler("https://en.wikipedia.org/wiki/World_War_II", 3)
+    crawler.start_crawling()
 

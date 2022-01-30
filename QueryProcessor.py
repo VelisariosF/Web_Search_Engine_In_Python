@@ -1,3 +1,4 @@
+import collections
 import math
 
 from Modules import *
@@ -36,8 +37,21 @@ class QueryProcessor:
 
         for i in range(0, Collection.getNumberOfDocuments()):
             previousResult = self.documentsAccumulators.get(docId)
-            newResult = previousResult /
+            documentLength = Document().calculateLengthOfDocument(docId)
+            newResult = previousResult / documentLength
+            self.documentsAccumulators.update({docId : newResult})
 
+
+        sortedAccumulators = dict(sorted(self.documentsAccumulators.items(), key=lambda item: item[1]))
+
+        ##choose topK Accumulators
+        k = 0
+        topKReleveantDocumentsBasedOnCosineSimilarity = {}
+        for documentID in reversed(sortedAccumulators):
+           topKReleveantDocumentsBasedOnCosineSimilarity[documentID] = sortedAccumulators[documentID]
+
+
+        return topKReleveantDocumentsBasedOnCosineSimilarity
 
 
 
