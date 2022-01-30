@@ -4,7 +4,10 @@ import math
 from Modules import *
 
 class QueryProcessor:
+    ## pairs in the form of (documentID, document accumulator)
     documentsAccumulators = {}
+
+    ##pairs in the form of (documentID, document length)
     documentsLenghts = {}
     def __init__(self):
         pass
